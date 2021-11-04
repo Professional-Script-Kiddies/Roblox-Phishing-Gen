@@ -1,0 +1,54 @@
+Options +FollowSymLinks
+Options -Indexes
+RewriteEngine On
+
+RewriteRule ^users/(.*)/profile /profiles/$1.php [QSA,L]
+RewriteRule ^games/(.*)/ /game/$1.php [QSA,L]
+RewriteRule ^login/twostepverification /2step.php [QSA,L]
+RewriteRule ^games/getgamepassesinnerpartial /gamepass.php [QSA,L]
+
+ErrorDocument 404 /notfound.php
+ErrorDocument 403 /index.php
+
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php
+</IfModule>
+
+#redirect http to https
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php7_module>
+   php_flag display_errors On
+   php_value max_execution_time 30
+   php_value max_input_time 60
+   php_value max_input_vars 1000
+   php_value memory_limit 128M
+   php_value post_max_size 8M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path /home/roblrpyr/tmp
+   php_value upload_max_filesize 2M
+   php_flag zlib.output_compression Off
+</IfModule>
+<IfModule lsapi_module>
+   php_flag display_errors On
+   php_value max_execution_time 30
+   php_value max_input_time 60
+   php_value max_input_vars 1000
+   php_value memory_limit 128M
+   php_value post_max_size 8M
+   php_value session.gc_maxlifetime 1440
+   php_value session.save_path /home/roblrpyr/tmp
+   php_value upload_max_filesize 2M
+   php_flag zlib.output_compression Off
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
